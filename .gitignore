@@ -167,6 +167,8 @@ modules.xml
 # Sonarlint plugin
 .idea/sonarlint
 
+CMakeLists.txt
+
 ### Windows ###
 # Windows thumbnail cache files
 Thumbs.db
