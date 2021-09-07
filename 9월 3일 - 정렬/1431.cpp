@@ -8,7 +8,7 @@
 using namespace std;
 
 //숫자끼리 더해주기
-int str_sum(string s){
+int strSum(string s){
     int len = s.length();
     int sum =0;
     for(int i=0; i <len; i++){
@@ -25,8 +25,8 @@ bool cmp (const string& A, const string& B){
     if(A.length() != B.length())
         return A.length()<B.length();
 
-    int asum =str_sum(A);
-    int bsum =str_sum(B);
+    int asum =strSum(A);
+    int bsum =strSum(B);
     //2번째 조건
     if (asum != bsum)
         return asum < bsum;

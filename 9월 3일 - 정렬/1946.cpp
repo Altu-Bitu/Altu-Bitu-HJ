@@ -12,8 +12,8 @@ int main(){
     int testcase;
     cin >> testcase;
 
-    //테스트 케이스 갯수만큼 for문(순위로 합격자정하는)돌리기
-    for (int i=0; i<testcase; i++)
+    //테스트 케이스 갯수만큼 while문 돌리기
+    while(testcase--)
     {
         int n;
         cin >> n;
