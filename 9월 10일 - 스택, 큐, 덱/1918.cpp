@@ -33,7 +33,7 @@ string makeResult(string str, map<char,int> mp)
                 case '/':
                 case '+':
                 case '-':
-                    while (!s.empty() && mp[s.top()] <= mp[str[i]])
+                    while (!s.empty() && mp[s.top()] >= mp[str[i]])
                     {
                         result += s.top();
                         s.pop();
@@ -70,10 +70,10 @@ int main()
     cin >> str;
     //우선순위 map
     map<char,int> mp;
-    mp['*']=1;
-    mp['/']=1;
-    mp['+']=2;
-    mp['-']=2;
+    mp['*']=2;
+    mp['/']=2;
+    mp['+']=1;
+    mp['-']=1;
 
     cout << makeResult(str,mp) << "\n";
 
