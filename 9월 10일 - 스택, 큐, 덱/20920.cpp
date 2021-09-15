@@ -14,7 +14,7 @@ vector <string> word;
 map <string,int> mp;
 string w;
 
-bool cmp(string a, string b) {
+bool cmp(const string &a, const string &b) {
     //빈도 수
     if (mp[a] != mp[b]) {
         return mp[a] > mp[b];
@@ -30,7 +30,7 @@ bool cmp(string a, string b) {
 int main(){
     cin.tie(nullptr); ios::sync_with_stdio(false);
     cin >> n >> m;
-    for (int i=0; i<n; i++){
+    while(n--){
         cin >> w;
         if(w.size() < m) continue; //단어 길이가 m보다 짧으면 밑의 if문 측정 필요X
         if (mp.find(w) == mp.end()) //첨보는 단어면 단어장에 넣어줌

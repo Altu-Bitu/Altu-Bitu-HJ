@@ -4,23 +4,23 @@
 #include <iostream>
 #include <string>
 #include <stack>
+#include <map>
 
 using namespace std;
 
-int main()
+string makeResult(string str, map<char,int> mp)
 {
-
-    string str;
-    cin >> str;
     string result;
     stack<char> s;
-
     for (int i = 0; i < str.length(); i++)
     {
-        //피연산자는 바로 문자열에
+        //피연산자
         if ('A' <= str[i] && str[i] <= 'Z')
+        {
             result += str[i];
-        //연산자는 4가지 경우
+            continue;
+        }
+        //연산자
         else
         {
             switch (str[i])
@@ -29,29 +29,18 @@ int main()
                 case '(':
                     s.push(str[i]);
                     break;
-                //2. 곱하기 나누기는 스택이 비어있지 않고 스택의 탑이 자신들보다 우선순위가 낮지 않으면 결과 문자열에 넣음
                 case '*':
                 case '/':
-                    while (!s.empty() && (s.top() == '*' || s.top() == '/'))
-                    {
-                        result += s.top();
-                        s.pop();
-                    }
-                    //while문에 해당 안되거나 while문이 끝나면 스택에 넣음
-                    s.push(str[i]);
-                    break;
-                //3. 더하기 빼기는 스택이 비어있지 않고 스택의 탑이 앞괄호가 아니면 결과 문자열에 넣음
                 case '+':
                 case '-':
-                    while (!s.empty() && s.top() != '(')
+                    while (!s.empty() && mp[s.top()] <= mp[str[i]])
                     {
                         result += s.top();
                         s.pop();
                     }
-                    //while문에 해당 안되거나 while문이 끝나면 스택에 넣음
                     s.push(str[i]);
                     break;
-                //4. 뒷괄호면 앞괄호가 나올때까지 결과 문자열에 넣음
+                    //4. 뒷괄호면 앞괄호가 나올때까지 결과 문자열에 넣음
                 case ')':
                     while (!s.empty() && s.top() != '(')
                     {
@@ -71,7 +60,22 @@ int main()
         s.pop();
     }
 
-    cout << result << "\n";
+    return result;
+}
+
+int main()
+{
+
+    string str;
+    cin >> str;
+    //우선순위 map
+    map<char,int> mp;
+    mp['*']=1;
+    mp['/']=1;
+    mp['+']=2;
+    mp['-']=2;
+
+    cout << makeResult(str,mp) << "\n";
 
     return 0;
 

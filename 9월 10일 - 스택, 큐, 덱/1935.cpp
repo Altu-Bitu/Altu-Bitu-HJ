@@ -10,6 +10,27 @@ using namespace std;
 
 int alphabet[26]; //알파벳
 
+double cal(double a, double b, char op)
+{
+   double result;
+    switch (op)
+    {
+        case '+':
+            result = b + a;
+            break;
+        case '-':
+            result = b - a;
+            break;
+        case '*':
+            result = b * a;
+            break;
+        case '/':
+            result = b / a;
+            break;
+    }
+    return result;
+}
+
 int main(void)
 {
     int N;
@@ -33,22 +54,8 @@ int main(void)
             double b = s.top();
             s.pop();
 
-            //연산자 종류에 따라 계산해줌. 이때 먼저 뺀 a가 사실은 식 상으로는 뒤에 있는 것 주의
-            switch (str[i])
-            {
-                case '+':
-                    s.push(b + a);
-                    break;
-                case '-':
-                    s.push(b - a);
-                    break;
-                case '*':
-                    s.push(b * a);
-                    break;
-                case '/':
-                    s.push(b / a);
-                    break;
-            }
+            s.push(cal(a,b,str[i]));
+
         }
         //피연산자 일 경우 문자열을 int형으로 바꿔서 넣어줌
         else

@@ -1,7 +1,8 @@
 //
 // Created by user on 2021-09-14.
 //
-#include <string>
+
+#include <iostream>
 #include <vector>
 #include <stack>
 
@@ -10,27 +11,43 @@ using namespace std;
 int solution(vector<vector<int>> board, vector<int> moves) {
     int answer = 0;
     stack<int> s;
+    stack<int> map[board.size()];
+
+    for(int j=0; j<board.size(); j++){
+        for (int i=board.size()-1; i>=0; i--){
+            if(board[i][j]) map[j].push(board[i][j]);
+            else break;
+        }
+    }
 
     for(int i=0; i<moves.size();i++){
         //board는 0부터 시작이므로 1 빼줌(moves[i]는 1부터 기재)
         int col = moves[i]-1;
-        for(int j=0; j<board.size();j++){
-            if(board[j][col] != 0) //인형이 있으면
-            {
-                //그리고 그 인형이 알고보니 스택탑이랑 같으면
-                if(!s.empty()&&s.top()==board[j][col])
-                {
-                    //폭파시키고 답에 두 개(새로들어간 애+원래있던 애) 넣어줌
-                    s.pop();
-                    answer +=2;
-                }
-                //아니면 그냥 스택에 넣어줌
-                else
-                    s.push(board[j][col]);
-                board[j][col]=0; //빼낸 인형자리에는 0넣어주기
-                break;
+
+        if(!map[col].empty()){
+            int pick = map[col].top();
+            map[col].pop();
+
+            if(s.empty()){
+                s.push(pick);
+                continue;
             }
+            if(s.top() == pick){
+                s.pop();
+                answer += 2;
+            }
+            else
+                s.push(pick);
         }
     }
     return answer;
+}
+int main() {
+    vector<vector<int>> board = {{0, 0, 0, 0, 0},
+                                 {0, 0, 1, 0, 3},
+                                 {0, 2, 5, 0, 1},
+                                 {4, 2, 4, 4, 2},
+                                 {3, 5, 1, 3, 1}};
+    vector<int> moves = {1, 5, 3, 5, 1, 2, 1, 4};
+    cout << solution(board, moves);
 }
