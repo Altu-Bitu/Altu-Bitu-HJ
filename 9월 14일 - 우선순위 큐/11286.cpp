@@ -7,6 +7,19 @@
 
 using namespace std;
 
+//cmp 구조체 선언. 비교연산이 true가 되도록
+struct cmp {
+    bool operator()(int a, int b)
+    {
+        if (abs(a) == abs(b))
+            return a > b;
+        else
+            return abs(a) > abs(b);
+    }
+};
+
+priority_queue<int, vector<int>, cmp> pq;
+
 int main() {
     cin.tie(0);
     cin.sync_with_stdio(0);
@@ -14,19 +27,16 @@ int main() {
     int N, num;
     cin >> N;
 
-    //{절댓값,진짜값} + 작은 게 가장 먼저
-    priority_queue<pair<int, int>, vector<pair<int, int> >, greater<pair<int, int> > > pq;
-
     for (int i = 0;i < N;i++) {
         cin >> num;
         if (num) {
-            pq.push({ abs(num), num });
+            pq.push(num);
         }
         else {
             if (pq.empty())
                 cout << 0 << "\n";
             else {
-                cout << pq.top().second << "\n";
+                cout << pq.top() << "\n";
                 pq.pop();
             }
         }

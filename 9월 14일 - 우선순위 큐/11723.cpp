@@ -34,18 +34,23 @@ int main(){
         else if(s=="check")
         {
             cin >> n;
-            if (visited[n])
+            cout << visited[n] << "\n";
+            /*if (visited[n])
                 cout << 1 << "\n";
             else
                 cout << 0 << "\n";
+            */
         }
         else if (s=="toggle")
         {
             cin >> n;
+            visited[n] =!visited[n];
+            /*
             if (visited[n])
                 visited[n]=false;
             else
                 visited[n]=true;
+            */
         }
         else if (s=="all")
             memset(visited, true, sizeof(visited));

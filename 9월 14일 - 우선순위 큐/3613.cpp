@@ -16,35 +16,47 @@
 #include <vector>
 
 using namespace std;
-string s;
+
+bool checkCType(string s){
+    if(s.find('_')!=string::npos)
+        return true;
+    else
+        return false;
+}
 
 //C를 바꿈
-void ConvertC(){
+string convertC(string s){
     while (s.find('_') != string::npos) {
         int pos = s.find('_');
         s.erase(pos,1);
-        s[pos] -= ('a' - 'A');
+        //s[pos] -= ('a' - 'A');
+        s[pos] = toupper(s[pos]);
     }
+    return s;
 }
 
 //자바를 바꿈
-void ConvertJava(){
+string convertJava(string s){
     for (int i = 0; i < s.length(); i++) {
         if (s[i] < 'a') {
             s.insert(i, "_");
-            //"_" 넣은 뒤 인덱스 문자 대문자로 바꿔줌
-            s[i+1] += ('a' - 'A');
-            i++; //뒤 문자는 이미 대문자로 바꿔줬으니까 인덱스 하나 넘어감
+            //"_" 넣은 뒤 인덱스 문자 소문자로 바꿔줌
+            //s[i+1] += ('a' - 'A');
+            s[i+1] = tolower(s[i+1]);
+            i++; //뒤 문자는 이미 소문자로 바꿔줬으니까 인덱스 하나 넘어감
         }
     }
+    return s;
 }
 
 int main(){
+    string s;
+    string result;
     bool err = false;
     cin >> s;
 
     //에러 1, 2 의 경우
-    if(s[0]<'a'||s[0]=='_'||s[s.length()-1]=='_')
+    if(('A'<=s[0]&&s[0]<='Z')||s[0]=='_'||s[s.length()-1]=='_')
         err= true;
 
     //에러 3의 경우
@@ -58,7 +70,7 @@ int main(){
     }
 
     //'_'의 유무로 c인지 자바인지 판별
-    if(s.find('_')!=string::npos){
+    if(checkCType(s)){
         //에러 4의 경우
         for(int i=0; i<s.length();i++){
             if('A'<=s[i] && s[i]<='Z'){
@@ -66,13 +78,13 @@ int main(){
                 break;
             }
         }
-        ConvertC();
+        result = convertC(s);
     }
     else
-        ConvertJava();
+       result = convertJava(s);
 
     if(err)
         cout << "Error!";
     else
-        cout << s;
+        cout << result;
 }
