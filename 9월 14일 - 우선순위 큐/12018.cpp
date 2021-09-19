@@ -37,19 +37,13 @@ int main(){
     }
 
     sort(my.begin(), my.end());
-    int cnt=0;
 
-    for(int i=0; i<my.size(); i++)
-    {
-        if(m>=my[i])
-        {
-            m -=my[i];
-            cnt++;
-        }
-        else
-            break;
+    int idx = 0;
+    while(idx<my.size()&&(m>=my[i])){
+        m-=my[i];
+        idx++;
     }
 
-    cout << cnt << "\n";
+    cout << idx << "\n";
     return 0;
 }

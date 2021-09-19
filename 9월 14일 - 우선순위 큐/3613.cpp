@@ -20,8 +20,6 @@ using namespace std;
 bool checkCType(string s){
     if(s.find('_')!=string::npos)
         return true;
-    else
-        return false;
 }
 
 //C를 바꿈
