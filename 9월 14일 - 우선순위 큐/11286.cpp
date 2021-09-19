@@ -13,6 +13,7 @@ struct cmp {
     {
         if (abs(a) == abs(b))
             return a > b;
+        return abs(a)>abs(b);
     }
 };
 

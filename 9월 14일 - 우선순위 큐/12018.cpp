@@ -39,8 +39,8 @@ int main(){
     sort(my.begin(), my.end());
 
     int idx = 0;
-    while(idx<my.size()&&(m>=my[i])){
-        m-=my[i];
+    while(idx<my.size()&&(m>=my[idx])){
+        m-=my[idx];
         idx++;
     }
 
