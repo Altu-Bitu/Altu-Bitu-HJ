@@ -9,8 +9,7 @@ using namespace std;
 int factorial(int num){
     if(num==1 || num ==0)
         return 1;
-    else
-        return factorial(num-1)*num;
+    return factorial(num-1)*num;
 }
 int main (){
     int n,k;

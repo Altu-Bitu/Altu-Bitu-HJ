@@ -24,6 +24,7 @@ int main(){
         {
             cnt++;
             s[play.first].push(play.second);
+            continue;
         }
         else
         {

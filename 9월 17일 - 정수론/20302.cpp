@@ -11,10 +11,10 @@ using namespace std;
 
 const int MAX = 1000001;
 vector <int> prime;
-int primeCnt[MAX];
+int prime_cnt[MAX];
 
 void isPrime(){
-    prime.assign(MAX, 0);
+    prime.assign(MAX+1, 0);
     for(int i = 2; i <= MAX; i++) prime[i] = i;
 
     for(int i = 2; i <= sqrt(MAX); i++) {
@@ -30,7 +30,7 @@ void seperateNum(int num)
 {
     num = abs(num);
     while(num>1){
-        primeCnt[prime[num]]++;
+        prime_cnt[prime[num]]++;
         num /= prime[num];
     }
 }
@@ -39,7 +39,7 @@ void seperateNum(int num)
 void eraseNum(int num){
     num = abs(num);
     while(num>1){
-        primeCnt[prime[num]]--;
+        prime_cnt[prime[num]]--;
         num /= prime[num];
     }
 }
@@ -49,6 +49,8 @@ int main(){
     char op;
     bool is_zero = false;
     cin >> n;
+
+    isPrime(); //omg.....ㅠㅠ
 
     //처음 수가 들어왔을때
     int num;
@@ -77,7 +79,7 @@ int main(){
         cin.ignore(); //입력 공백 무시
     }
 
-    bool banMinCho = false; //치약인지 민초인지
+    bool ban_mincho = false; //치약인지 민초인지
 
     //0을 연산에 쓰면 무조건 정수가 됨
     if (is_zero)
@@ -85,10 +87,10 @@ int main(){
     else {
         //소수카운트가 음수라는건 분자가 살아 있다는 얘기
         for (int i = 2; i <= MAX; i++)
-            if (primeCnt[i] < 0)
-                banMinCho = true;
+            if (prime_cnt[i] < 0)
+                ban_mincho = true;
 
-        if (banMinCho)
+        if (ban_mincho)
             cout << "toothpaste";
         else
             cout << "mint chocolate";
