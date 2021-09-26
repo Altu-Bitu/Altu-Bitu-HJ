@@ -7,20 +7,24 @@
 using namespace std;
 
 int main(){
-    int R,B;
+    int R,B,total,L,W,len;
     cin >> R >> B;
 
-    //빨간색 타일이 갈색 타일을 다 덮어야만 하므로 빨간색 타일 수 기준
-    //최소 3*3부터(빨간색이 8, 갈색이 1이므로)
-    for(int W=3;W<5000;W++){
-        for(int L=3; L<5000; L++){
-            if((2*(W-2)+(2*(L-2))+4)==R){
-                if(L*W == (R+B) && L >= W){
-                    cout << L << ' ' << W << "\n";
-                    break;
-                }
+    total = R+B;
+
+    for(int i=2; i<total/2; i++){
+        if(i*(total/i)==total){
+            int num = 2*(i+total/i)-4;
+            if(num==R||num==B){
+                len = i;
+                break;
             }
         }
     }
+
+    L = max(len, total/len);
+    W = min(len, total/len);
+
+    cout << L << " " << W;
     return 0;
 }

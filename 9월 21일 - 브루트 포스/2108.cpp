@@ -20,19 +20,16 @@ int main(){
         cin >> tmp;
         arr.push_back(tmp);
         sum += tmp;
-        //들어올 수 있는 정수 범위는 -4000~4000인데
-        //벡터는 0부터 시작하므로, 0보다 작으면 절댓값으로 넣어주고 크면 4000을 더해서 넣어준다
-        //0~8000의 형태로 재배치하는 느낌..
-        tmp = (arr[i]<=0)? abs(arr[i]):arr[i]+4000;
-        vec[tmp]++; //최빈값을 위한 값 등장개수 세기
-        if (vec[tmp]>most)
-            most = vec[tmp]; //최빈값 갱신해주기
+        vec[tmp+4000]++; //최빈값을 위한 값 등장개수 세기
+        if (vec[tmp+4000]>most)
+            most = vec[tmp+4000]; //최빈값 갱신해주기
     }
 
     //중앙값 구해야 되니까 정렬
     sort(arr.begin(),arr.end());
 
-    for(int i=0; i<8001;i++){
+    for(int i=-4000; i<4001;i++){
+        tmp = i+4000;
         if(vec[tmp]==most){
             mode = i;
             if(second)
