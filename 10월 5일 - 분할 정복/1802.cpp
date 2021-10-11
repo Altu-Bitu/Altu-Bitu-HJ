@@ -45,10 +45,11 @@ int main(){
         string in_out;
         cin >> in_out;
 
-        if(in_out.size() %2==0){
+        /*if(in_out.size() %2==0){
             cout << "NO\n";
             continue;
         }
+        */
 
         res = checkInOut(in_out,0, in_out.size()-1);
         if(res)

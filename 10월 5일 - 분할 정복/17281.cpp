@@ -43,7 +43,7 @@ int main() {
     //선수마다 N이닝에 얻는 점수들
     score.assign(n, vector<int>(9));
     for (int i = 0; i < n; i++){
-        for (int j = 0; i < 9; i++)
+        for (int j = 0; j < 9; j++)
             cin >> score[i][j];
     }
 

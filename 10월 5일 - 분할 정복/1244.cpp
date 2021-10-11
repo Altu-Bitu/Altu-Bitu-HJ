@@ -32,7 +32,9 @@ int main() {
         //넓혀가도 같으면 또 반전... 반복(구간벗어나기 전까지)
         else{
             is_switched[num]= !is_switched[num];
-            for(int i=1; (is_switched[num+i]==is_switched[num-i])&&num+i<=n&&num-i>=1;i++){
+            for(int i=1; (is_switched[num+i]==is_switched[num-i]);i++){
+                if(num+i>n||num-i<1)
+                    break;
                 is_switched[num+i] =!is_switched[num+i];
                 is_switched[num-i] =!is_switched[num-i];
             }
