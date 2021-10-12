@@ -30,10 +30,10 @@ void moveField(int n){
             else is_ground[i+n]=true; //밀어내진 못했지만 나아가서 어딘가에 안착했을때
             is_ground[i]=false; //기존 필드에 있는거 삭제해줌
         }
-        //없으면
-        if (n==4) ++cnt; //홈런이면 점수++
-        else is_ground[n-1]=true; //아니면 필드 진출
     }
+    //없으면
+    if (n==4) ++cnt; //홈런이면 점수++
+    else is_ground[n-1]=true; //아니면 필드 진출
 }
 
 int main() {
