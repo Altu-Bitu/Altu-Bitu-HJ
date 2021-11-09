@@ -3,41 +3,45 @@
 //
 
 #include <iostream>
-#include <vector>
 #include <string>
+#include <map>
 
 using namespace std;
 
-string di[8]={"R","L","B","T","RT","LT","RB","LB"};
+map <string,int> di={{"R",0},{"L",1},{"B",2},{"T",3},{"RT",4},{"LT",5},{"RB",6},{"LB",7}};
 int dix[8] = {1,-1,0,0,1,-1,1,-1};
 int diy[8] = {0,0,-1,1,1,1,-1,-1};
 int kx,ky,sx,sy;
 
-bool external(int x,int y){
+string pointToString(int x, int y) {
+    string ans;
+    ans = (x + 'A'-1);
+    ans += (y + '0');
+    return ans;
+}
+
+bool isExternal(int x,int y){
     if(x>0 && y>0 && x<9 && y<9)
         return false;
     return true;
 }
 
-//해당 명령어가 나올때 해당 방향으로 킹이 이동하되(+외부인지 판단),
-//돌이 겹칠 경우 돌도 움직일 수 있도록
-//함수가 엄청 복잡하게 됐는데 어떻게 해야 간단하게 만들 수 있을지 모르겠네요..
-void chase(string input){
-    for(int i=0; i<8; i++){
-        if(input==di[i]){
-            //외부면 바로 탈출
-            if(external(kx+dix[i],ky+diy[i])) break;
-            if(kx+dix[i] == sx && ky+diy[i] == sy){
-                //돌이 움직였을때 외부면 킹도 아예 안움직이므로 바로 탈출
-                if(external(sx+dix[i],sx+diy[i])) break;
-                sx += dix[i];
-                sy += diy[i];
-            }
-            kx += dix[i];
-            ky += diy[i];
-        }
+void moveKing(string input){
+    int i = di[input];
+    //외부면 바로 탈출
+    if(isExternal(kx+dix[i],ky+diy[i]))
+        return;
+    if(kx+dix[i] == sx && ky+diy[i] == sy){
+        //돌이 움직였을때 외부면 킹도 아예 안움직이므로 바로 탈출
+        if(isExternal(sx+dix[i],sy+diy[i]))
+            return;
+        sx += dix[i];
+        sy += diy[i];
     }
+    kx += dix[i];
+    ky += diy[i];
 }
+
 
 int main(){
     ios_base::sync_with_stdio();
@@ -55,9 +59,10 @@ int main(){
 
     while(n--){
         cin >> input;
-        chase(input);
+        moveKing(input);
     }
 
-    cout << (char)(kx+'A'-1)<<ky<<"\n"<<(char)(sx+'A'-1) <<sy;
-
+    cout << pointToString(kx,ky)<< "\n" << pointToString(sx,sy)<<"\n";
+    //cout << (char)(kx+'A'-1)<<ky<<"\n"<<(char)(sx+'A'-1) <<sy;
+    return 0;
 }

@@ -2,9 +2,11 @@
 // Created by user on 2021-11-07.
 //
 
+//레퍼런스 : https://jaimemin.tistory.com/1163#recentComments
+
+
 #include <iostream>
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 
@@ -21,11 +23,11 @@ void dragonCurve(int x, int y, int d, int g){
     dragon.push_back(d);
 
     //세대별로 어떻게 움직일지 dragon벡터에 저장
-    for(int i=0;i<g;i++){
-        vector <int> temp = dragon;
-        for(int j=temp.size()-1; j>=0; j--)
+    while(g--){
+        int size = dragon.size();
+        for(int j=size-1; j>=0; j--)
             //90도 돌려서 넣어줌
-            dragon.push_back((temp[j]+1)%4);
+            dragon.push_back((dragon[j]+1)%4);
     }
 
     //초기 좌표 체크
@@ -34,9 +36,6 @@ void dragonCurve(int x, int y, int d, int g){
     for(int i=0;i<dragon.size();i++){
         y += diy[dragon[i]];
         x += dix[dragon[i]];
-
-        if(0<=x && x<MAX && 0<=y && y<MAX)
-            visited[y][x]=true;
     }
 }
 
