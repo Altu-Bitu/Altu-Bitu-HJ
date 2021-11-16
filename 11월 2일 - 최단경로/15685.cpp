@@ -36,6 +36,7 @@ void dragonCurve(int x, int y, int d, int g){
     for(int i=0;i<dragon.size();i++){
         y += diy[dragon[i]];
         x += dix[dragon[i]];
+        visited[y][x]=true;
     }
 }
 
